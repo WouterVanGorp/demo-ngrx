@@ -3,18 +3,24 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Pokemon } from './../../models';
-import { PokemonService } from './../../services/pokemon.service';
+import { PokemonStoreService } from './../../services/poke-store.service';
 
 @Component({
   templateUrl: './overview.component.html',
 })
 export class OverviewComponent implements OnInit {
   pokemon$: Observable<Pokemon[]>;
+  nameFilter$: Observable<string>;
 
-  constructor(private router: Router, private pokeService: PokemonService) {}
+  constructor(
+    private router: Router,
+    private pokeStore: PokemonStoreService
+  ) {}
 
   ngOnInit(): void {
-    this.pokemon$ = this.pokeService.getCards();
+    this.pokeStore.loadPokemon();
+    this.pokemon$ = this.pokeStore.pokemon$;
+    this.nameFilter$ = this.pokeStore.nameFilter$;
   }
 
   goDetail(id: string) {
@@ -22,6 +28,6 @@ export class OverviewComponent implements OnInit {
   }
 
   search(name: string) {
-    this.pokemon$ = this.pokeService.getCards(name);
+    this.pokeStore.searchPokemon(name);
   }
 }
