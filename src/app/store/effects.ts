@@ -23,16 +23,16 @@ export class PokemonEffects {
     private pokeApi: PokemonService
   ) {}
 
-  loadPokeman = createEffect(() =>
-    this.actions$.pipe(
-      ofType(pokeActions.searchPokemon),
-      withLatestFrom(this.store.select(pokeSelectors.selectName)),
-      switchMap(([_, name]) =>
-        this.pokeApi.getCards(name).pipe(
-          map((pokemon) => pokeActions.updatePokemon({ pokemon })),
-          catchError(() => EMPTY)
-        )
+  loadPokemon = createEffect(() =>
+  this.actions$.pipe(
+    ofType(pokeActions.searchPokemon),
+    withLatestFrom(this.store.select(pokeSelectors.selectName)),
+    switchMap(([_, name]) =>
+      this.pokeApi.getCards(name).pipe(
+        map((pokemon) => pokeActions.updatePokemon({ pokemon })),
+        catchError(() => EMPTY)
       )
     )
+  )
   );
 }

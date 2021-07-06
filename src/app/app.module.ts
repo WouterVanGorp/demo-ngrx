@@ -39,11 +39,13 @@ const components = [...pages, ListContainerComponent, CardComponent, FilterCompo
     AppRoutingModule,
 
     StoreModule.forRoot({}),
-    StoreModule.forFeature(POKE_STATE_KEY, pokemonReducer),
-    EffectsModule.forRoot([PokemonEffects]),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),
+    
+    StoreModule.forFeature(POKE_STATE_KEY, pokemonReducer),
+    EffectsModule.forFeature([PokemonEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
