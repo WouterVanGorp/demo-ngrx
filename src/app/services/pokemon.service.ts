@@ -18,9 +18,10 @@ export class PokemonService {
     });
   }
 
-  public getCards(): Observable<Pokemon[]> {
+  public getCards(name?: string): Observable<Pokemon[]> {
+    const qp = name ? '?q=name:*' + name + '*' : '';
     return this.http
-      .get<{ data: Pokemon[] }>(this.apiUrl + 'cards', {
+      .get<{ data: Pokemon[] }>(this.apiUrl + 'cards' + qp, {
         headers: this.httHeader,
       })
       .pipe(map((res) => res.data));
