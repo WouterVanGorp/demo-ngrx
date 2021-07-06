@@ -1,1 +1,3 @@
-<h1>detail</h1>
+<div *ngIf="pokemon$ | async as pokemon">
+  <img [src]="pokemon.images.large" [alt]="pokemon.name" />
+</div>

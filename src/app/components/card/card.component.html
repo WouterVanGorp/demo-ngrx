@@ -1,0 +1,16 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title
+      >{{ pokemon.name }}</mat-card-title
+    >
+    <mat-card-subtitle>{{ "HP: " + pokemon.hp }} </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div
+      class="img"
+      [ngStyle]="{
+        'background-image': 'url(' + pokemon.images.small + ')'
+      }"
+    ></div>
+  </mat-card-content>
+</mat-card>

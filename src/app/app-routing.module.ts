@@ -5,9 +5,9 @@ import { OverviewComponent } from './pages/overview/overview.component';
 import { DetailComponent } from './pages/detail/detail.component';
 
 const routes: Routes = [
-  { path: 'facts', component: OverviewComponent },
-  { path: 'facts/:id', component: DetailComponent },
-  { path: '**', redirectTo: 'facts' },
+  { path: 'pokemon', component: OverviewComponent },
+  { path: 'pokemon/:id', component: DetailComponent },
+  { path: '**', redirectTo: 'pokemon' },
 ];
 
 @NgModule({

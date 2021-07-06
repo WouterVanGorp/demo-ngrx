@@ -1,1 +1,8 @@
-<h1>overview</h1>
+
+
+<app-list 
+[list]="pokemon$ | async"
+(pokeClick)='goDetail($event)' 
+
+>
+</app-list>
