@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -34,7 +34,7 @@ export class FilterComponent implements OnInit {
   @Input() name = '';
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
-  form: FormGroup;
+  form: FormGroup<{name: FormControl<string>}>;
 
   constructor(private fb: FormBuilder) {}
 
