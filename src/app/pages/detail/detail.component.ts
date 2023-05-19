@@ -1,3 +1,4 @@
+import { NgIf, AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,7 +8,9 @@ import { Pokemon } from './../../models';
 import { PokemonService } from './../../services/pokemon.service';
 
 @Component({
-  templateUrl: './detail.component.html',
+    templateUrl: './detail.component.html',
+    standalone: true,
+    imports: [NgIf, AsyncPipe],
 })
 export class DetailComponent implements OnInit {
   pokemon$: Observable<Pokemon>;

@@ -1,9 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-filter',
-  template: `
+    selector: 'app-filter',
+    template: `
     <div class="filter" [formGroup]="form">
       <mat-form-field>
         <mat-label>Pokemon</mat-label>
@@ -19,8 +22,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
       </button>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .filter {
         background-color: white;
         margin-top: 1rem;
@@ -28,7 +31,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
         border-radius: 60px;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+    ],
 })
 export class FilterComponent implements OnInit {
   @Input() name = '';

@@ -26,28 +26,27 @@ const pages = [DetailComponent, OverviewComponent];
 const components = [...pages, ListContainerComponent, CardComponent, FilterComponent];
 
 @NgModule({
-  declarations: [AppComponent, ...components],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatCardModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-    }),
-    
-    StoreModule.forFeature(POKE_STATE_KEY, pokemonReducer),
-    EffectsModule.forFeature([PokemonEffects]),
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatInputModule,
+        MatIconModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([]),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25, // Retains last 25 states
+        }),
+        StoreModule.forFeature(POKE_STATE_KEY, pokemonReducer),
+        EffectsModule.forFeature([PokemonEffects]),
+        ...components,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
