@@ -1,12 +1,35 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
-import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { PokemonEffects } from './app/store/effects';
+import { pokemonReducer } from './app/store/reducer';
+import { POKE_STATE_KEY } from './app/store/state';
+import { AppRoutingModule } from './app/app-routing.module';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+    providers: [
+        importProvidersFrom(
+            AppRoutingModule,
+            StoreModule.forRoot({}),
+            EffectsModule.forRoot([]),
+            StoreDevtoolsModule.instrument({
+                maxAge: 25, // Retains last 25 states
+            }),
+            StoreModule.forFeature(POKE_STATE_KEY, pokemonReducer),
+            EffectsModule.forFeature([PokemonEffects]),
+        ),
+        provideAnimations(),
+        provideHttpClient()
+    ],
+}).catch((err) => console.error(err));
